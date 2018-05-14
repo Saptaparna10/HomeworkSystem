@@ -27,4 +27,14 @@ public class UserService {
         return repository.save(user);
     }
 
+    @GetMapping("/api/user")
+    public List<User> findAllUsers() {
+        return (List<User>) repository.findAll();
+    }
+
+    @DeleteMapping("/api/user/{userId}")
+    public void deleteUser(@PathVariable("userId") int id) {
+        repository.deleteById(id);
+    }
+
 }

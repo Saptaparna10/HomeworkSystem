@@ -8,7 +8,7 @@ function UserServiceClient() {
     var self = this;
 
     function createUser(user, callback) {
-        alert('!!');
+        alert('createUser service');
         return fetch(self.url, {
             method: 'post',
             body: JSON.stringify(user),
@@ -18,7 +18,10 @@ function UserServiceClient() {
         });
     }
     function findAllUsers(callback) {
-
+        return fetch(self.url)
+            .then(function (response) {
+                return response.json();
+            });
     }
     function findUserById(userId, callback) {
 
@@ -27,6 +30,10 @@ function UserServiceClient() {
 
     }
     function deleteUser(userId, callback) {
+        alert('deleteUser service');
 
+        return fetch(self.url + '/' + userId, {
+            method: 'delete'
+        });
     }
 }
