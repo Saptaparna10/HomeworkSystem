@@ -8,6 +8,11 @@ function UserServiceClient() {
     this.register_url = 'http://localhost:8080/api/register';
     var self = this;
     this.register = register;
+    this.login = login;
+
+  function login() {
+
+  }
 
     function register(user, callback) {
         return fetch(self.register_url, {
