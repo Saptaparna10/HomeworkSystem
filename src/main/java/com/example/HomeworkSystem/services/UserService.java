@@ -37,4 +37,29 @@ public class UserService {
         repository.deleteById(id);
     }
 
+
+    @PutMapping("/api/user/{userId}")
+    public User updateUser(@PathVariable("userId") int userId, @RequestBody User newUser) {
+        Optional<User> data = repository.findById(userId);
+        if(data.isPresent()) {
+            User user = data.get();
+            user.setUsername(newUser.getUsername());
+            user.setFirstName(newUser.getFirstName());
+            user.setLasteName(newUser.getLastName());
+            user.setPassword(newUser.getPassword());
+            repository.save(user);
+            return user;
+        }
+        return null;
+    }
+
+    @GetMapping("/api/user/{userId}")
+    public User findUserById(@PathVariable("userId") int userId) {
+        Optional<User> data = repository.findById(userId);
+        if(data.isPresent()) {
+            return data.get();
+        }
+        return null;
+    }
+
 }

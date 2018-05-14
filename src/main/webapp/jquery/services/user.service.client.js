@@ -8,7 +8,6 @@ function UserServiceClient() {
     var self = this;
 
     function createUser(user, callback) {
-        alert('createUser service');
         return fetch(self.url, {
             method: 'post',
             body: JSON.stringify(user),
@@ -24,14 +23,28 @@ function UserServiceClient() {
             });
     }
     function findUserById(userId, callback) {
-
+        return fetch(self.url + '/' + userId)
+            .then(function(response){
+                return response.json();
+            });
     }
     function updateUser(userId, user, callback) {
-
+        return fetch(self.url + '/' + userId, {
+            method: 'put',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(function(response){
+                if(response.bodyUsed) {
+                    return response.json();
+                } else {
+                    return null;
+                }
+            });
     }
     function deleteUser(userId, callback) {
-        alert('deleteUser service');
-
         return fetch(self.url + '/' + userId, {
             method: 'delete'
         });
