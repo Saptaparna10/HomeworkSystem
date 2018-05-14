@@ -67,7 +67,21 @@ public class UserService {
     //register() & findUserByUsername()
     @PostMapping("/api/register")
     public User register(@RequestBody User user, HttpSession session) {
-        return null;
+        System.out.println("register!!!!!!!");
+
+        if(repository.findUserByUsername(user.getUsername()) != null){
+            System.out.println("Already Registered!!!!!!!");
+            //return null;
+        }
+
+        user.setPassword(user.getPassword());
+        User u = repository.save(user);
+
+
+        session.setAttribute("loggedIn", u);
+        session.setMaxInactiveInterval(600);
+        return u;
+
     }
 
 }

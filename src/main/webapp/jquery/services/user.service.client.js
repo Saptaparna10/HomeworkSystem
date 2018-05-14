@@ -5,11 +5,18 @@ function UserServiceClient() {
     this.deleteUser = deleteUser;
     this.updateUser = updateUser;
     this.url = 'http://localhost:8080/api/user';
+    this.register_url = 'http://localhost:8080/api/register';
     var self = this;
     this.register = register;
 
-    function register() {
-
+    function register(user, callback) {
+        return fetch(self.register_url, {
+            method: 'post',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
     }
 
     function createUser(user, callback) {

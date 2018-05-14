@@ -8,5 +8,8 @@ import com.example.HomeworkSystem.models.User;
 
 public interface UserRepository
         extends CrudRepository<User, Integer>{
-    //findUserByUsername()
+
+    @Query("SELECT u FROM User u WHERE u.username=:username")
+    Iterable<User> findUserByUsername(
+            @Param("username") String username);
 }
