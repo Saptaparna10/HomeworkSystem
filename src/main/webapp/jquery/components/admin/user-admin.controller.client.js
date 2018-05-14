@@ -3,18 +3,33 @@
     var removeBtn, editBtn, createBtn;
     var firstNameFld, lastNameFld, roleFld;
     var userRowTemplate, tbody;
-    var userService = new AdminUserServiceClient();
+    var userService = new UserServiceClient()
+
     $(main);
 
     function main() {
-        var usernameFld = $('#usernameFld').val();
-        var passwordFld = $('#passwordFld').val();
-        var firstNameFld = $('#firstNameFld').val();
-        var lastNameFld = $('#lastNameFld').val();
-        var roleFld = $('#roleFld').val();
+        $('#createUser').click(createUser);
     }
     function createUser() {
         console.log('createUser');
+
+        usernameFld = $('#usernameFld').val();
+        passwordFld = $('#passwordFld').val();
+        firstNameFld = $('#firstNameFld').val();
+        lastNameFld = $('#lastNameFld').val();
+        roleFld = $('#roleFld').val();
+
+        var user = {
+            username: usernameFld,
+            password: passwordFld,
+            firstName: firstNameFld,
+            lastName: lastNameFld
+        };
+
+        userService
+            .createUser(user)
+            .then(findAllUsers);
+
     }
     function findAllUsers() {
         console.log('findAllUsers');
