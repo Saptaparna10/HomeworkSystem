@@ -6,6 +6,11 @@ function UserServiceClient() {
     this.updateUser = updateUser;
     this.url = 'http://localhost:8080/api/user';
     var self = this;
+    this.register = register;
+
+    function register() {
+
+    }
 
     function createUser(user, callback) {
         return fetch(self.url, {

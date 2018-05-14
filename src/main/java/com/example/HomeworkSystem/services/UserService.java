@@ -17,6 +17,8 @@ import com.example.HomeworkSystem.repositories.UserRepository;
 
 import com.example.HomeworkSystem.models.User;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 public class UserService {
     @Autowired
@@ -59,6 +61,12 @@ public class UserService {
         if(data.isPresent()) {
             return data.get();
         }
+        return null;
+    }
+
+    //register() & findUserByUsername()
+    @PostMapping("/api/register")
+    public User register(@RequestBody User user, HttpSession session) {
         return null;
     }
 
