@@ -45,7 +45,7 @@ public class UserService {
         Optional<User> data = repository.findById(userId);
         if(data.isPresent()) {
             User user = data.get();
-            user.setUsername(newUser.getUsername());
+            //user.setUsername(newUser.getUsername());
             user.setFirstName(newUser.getFirstName());
             user.setLasteName(newUser.getLastName());
             user.setPassword(newUser.getPassword());
@@ -84,10 +84,33 @@ public class UserService {
 
     }
 
-
     @PostMapping("/api/login")
     public User login(@RequestBody User user, HttpSession session) {
+        System.out.println("login!!!!!!!");
+
+        User u = repository.findUserByUsername(user.getUsername());
+
+        if(u != null &&  user.getPassword().equals(u.getPassword())) {
+            session.setAttribute("loggedIn", u);
+            session.setMaxInactiveInterval(600);
+            return u;
+        }
+        else{
+            System.out.println("invalid!!");
+           return null;
+
+        }
+    }
+
+    @PutMapping("/api/profile")
+    public User updateProfile(@RequestBody User user, HttpSession session) {
         return null;
     }
+
+    @PostMapping("/api/logout")
+    public User login(HttpSession session) {
+        return null;
+    }
+
 
 }

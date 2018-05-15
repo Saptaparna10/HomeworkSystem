@@ -6,12 +6,19 @@ function UserServiceClient() {
     this.updateUser = updateUser;
     this.url = 'http://localhost:8080/api/user';
     this.register_url = 'http://localhost:8080/api/register';
+    this.login_url = 'http://localhost:8080/api/login';
     var self = this;
     this.register = register;
     this.login = login;
 
-  function login() {
-
+  function login(user, callback) {
+      return fetch(self.login_url, {
+          method: 'post',
+          body: JSON.stringify(user),
+          headers: {
+              'content-type': 'application/json'
+          }
+      });
   }
 
     function register(user, callback) {
@@ -54,7 +61,7 @@ function UserServiceClient() {
             }
         })
             .then(function(response){
-                if(response.bodyUsed) {
+                if(response.ok) {
                     return response.json();
                 } else {
                     return null;
